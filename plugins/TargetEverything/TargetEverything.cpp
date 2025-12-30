@@ -46,9 +46,9 @@ void TargetEverything::Initialize(ImGuiContext* ctx, const ImGuiAllocFns fns, co
         GW::Terminate();
         return;
     }
-    GW::HookBase::Initialize();
-    GW::HookBase::CreateHook(reinterpret_cast<void**>(&GetIsAgentTargettable_Func), GetIsAgentTargettableOverride, reinterpret_cast<void**>(&RetGetIsAgentTargettable));
-    GW::HookBase::EnableHooks(GetIsAgentTargettable_Func);
+    GW::Hook::Initialize();
+    GW::Hook::CreateHook(reinterpret_cast<void**>(&GetIsAgentTargettable_Func), GetIsAgentTargettableOverride, reinterpret_cast<void**>(&RetGetIsAgentTargettable));
+    GW::Hook::EnableHooks(GetIsAgentTargettable_Func);
     GW::Scanner::Initialize();
 }
 
@@ -60,14 +60,14 @@ void TargetEverything::SignalTerminate()
 
 bool TargetEverything::CanTerminate()
 {
-    return GW::HookBase::GetInHookCount() == 0;
+    return GW::Hook::GetInHookCount() == 0;
 }
 
 void TargetEverything::Terminate()
 {
     ToolboxPlugin::Terminate();
     if (GetIsAgentTargettable_Func) {
-        GW::HookBase::RemoveHook(GetIsAgentTargettable_Func);
+        GW::Hook::RemoveHook(GetIsAgentTargettable_Func);
     }
-    GW::HookBase::Deinitialize();
+    GW::Hook::Deinitialize();
 }

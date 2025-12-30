@@ -85,13 +85,13 @@ void Follower::SignalTerminate()
 
 bool Follower::CanTerminate()
 {
-    return GW::HookBase::GetInHookCount() == 0;
+    return GW::Hook::GetInHookCount() == 0;
 }
 
 void Follower::Terminate()
 {
     ToolboxUIPlugin::Terminate();
-    GW::HookBase::Deinitialize();
+    GW::Hook::Deinitialize();
 }
 
 void Follower::LoadSettings(const wchar_t* folder)

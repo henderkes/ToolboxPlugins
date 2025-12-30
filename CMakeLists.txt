@@ -18,6 +18,7 @@ add_compile_options(/MP /permissive-)
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
 find_path(SIMPLEINI_INCLUDE_DIRS "ConvertUTF.c")
+find_path(EARCUT_HPP_INCLUDE_DIRS "mapbox/earcut.hpp")
 find_package(unofficial-uwebsockets CONFIG REQUIRED)
 find_package(wolfssl CONFIG REQUIRED)
 find_package(minhook CONFIG REQUIRED)
@@ -25,6 +26,7 @@ find_package(nlohmann_json CONFIG REQUIRED)
 find_package(ctre CONFIG REQUIRED)
 find_package(directxtex CONFIG REQUIRED)
 
+add_compile_definitions(WOLFSSL_NO_OPTIONS_H)
 include(gwtoolboxpp)
 
 MACRO(SUBDIRLIST result curdir)
@@ -52,20 +54,19 @@ FOREACH(subdir ${SUBDIRS})
 	target_include_directories(${subdir} PRIVATE
 		${gwtoolboxpp_SOURCE_DIR}/plugins/Base
 		${gwtoolboxpp_SOURCE_DIR}/GWToolboxdll
+		${gwtoolboxpp_SOURCE_DIR}/Dependencies/GWCA/include
+		${SIMPLEINI_INCLUDE_DIRS}
 		)
 	target_link_libraries(${subdir} PRIVATE
 		RestClient
 		imgui
 		directxtex
 		gwca
-		earcut
 		easywsclient
-		discord_game_sdk
 		nlohmann_json::nlohmann_json
 		wolfssl::wolfssl
 	    minhook::minhook
 	    ctre::ctre
-		simpleini
 		imgui::fonts
 		IconFontCppHeaders
 		nativefiledialog
