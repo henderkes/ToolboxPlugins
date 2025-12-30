@@ -16,6 +16,15 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin/")
 
 add_compile_options(/MP /permissive-)
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
+
+find_path(SIMPLEINI_INCLUDE_DIRS "ConvertUTF.c")
+find_package(unofficial-uwebsockets CONFIG REQUIRED)
+find_package(wolfssl CONFIG REQUIRED)
+find_package(minhook CONFIG REQUIRED)
+find_package(nlohmann_json CONFIG REQUIRED)
+find_package(ctre CONFIG REQUIRED)
+find_package(directxtex CONFIG REQUIRED)
+
 include(gwtoolboxpp)
 
 MACRO(SUBDIRLIST result curdir)
@@ -53,6 +62,9 @@ FOREACH(subdir ${SUBDIRS})
 		easywsclient
 		discord_game_sdk
 		nlohmann_json::nlohmann_json
+		wolfssl::wolfssl
+	    minhook::minhook
+	    ctre::ctre
 		simpleini
 		imgui::fonts
 		IconFontCppHeaders
