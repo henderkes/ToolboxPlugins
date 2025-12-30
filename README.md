@@ -19,12 +19,12 @@ If you don't know what GWToolbox is, see [https://gwtoolbox.com](https://gwtoolb
 1. Open **Git Bash**. Use all the following commands in **Git Bash**. 
 
 2. Clone the repository: 
-`git clone https://github.com/DubbleClick/ToolboxPlugins.git`
+`git clone https://github.com/henderkes/ToolboxPlugins.git`
 
 3. Navigate to the ToolboxPlugins folder: 
 `cd ToolboxPlugins`
 
-4. Build: `cmake -B build`
+4. Build: `cmake --preset=vcpkg`
 
 5. Open: `cmake --open build`
 
